@@ -1,8 +1,25 @@
 import component from '../../component'
 
-@component
-export default class Home {
+export default @component class Root {
+  render() {
+    return (
+      <root>
+        <Head />
+        <Section>
+          <Title>Test it out</Title>
+        </Section>
+      </root>
+    )
+  }
+}
+
+@component class Head {
   componentDidMount() {
+    this.setHeight()
+    this.addEvent(window, 'resize', this.setHeight)
+  }
+
+  setHeight = () => {
     this.head.style.minHeight = `${window.innerHeight}px`
   }
 
@@ -11,34 +28,25 @@ export default class Home {
       <root>
         <header ref={_ => this.head = _}>
           <logo>
-            macro
+            <row $alignCenter><cursor $mblock /> macro</row>
           </logo>
-          <lead>
-            Macro is data science.
-          </lead>
-          <snippet $emphasis>
-            A diverse team of data scientists that work for you, answering your company's biggest questions.
-          </snippet>
-          <snippet>
-            Live, interactive, cross-platform answers on your data, more accurately and in less time than in-house.
-          </snippet>
-          <cursor />
-          <snippet>
-            This is the future of running companies.
-          </snippet>
+          <align>
+            <lead>
+              Macro is data science.
+            </lead>
+            <snippet $emphasis>
+              Expert data scientists working work with you to answer your company's biggest questions.
+            </snippet>
+            <snippet>
+              Our platform enables an ongoing, always up to date history of your intelligence.
+            </snippet>
+            <strip />
+            <snippet>
+              This is the future of running companies.
+            </snippet>
+          </align>
           <line />
         </header>
-        <section>
-          <h2>
-            Our team
-          </h2>
-          <p $pad>
-            We'll assign you a senior data scientist as an account lead who will be your point of contact and coordinate all your questions with our full team.
-          </p>
-          <p $pad>
-            We hire amazing specialists from all fields of data science, from engineers to statisticians to advanced modeling experts. Our team is instantly available, diverse, and flexible which means you don’t need to recruit, hire, and manage.
-          </p>
-        </section>
       </root>
     )
   }
@@ -61,7 +69,7 @@ export default class Home {
       margin: [0, 0, 20],
     },
     lead: {
-      fontSize: 82,
+      fontSize: 72,
       fontWeight: 200,
       position: 'relative',
       zIndex: 100,
@@ -82,7 +90,7 @@ export default class Home {
     line: {
       width: 1,
       height: '400%',
-      background: '#333',
+      background: '#252525',
       position: 'absolute',
       zIndex: 0,
       top: '-100%',
@@ -94,14 +102,32 @@ export default class Home {
     cursor: {
       width: 20,
       height: 20,
+      background: '#000',
+      border: '2px solid yellow',
+    },
+    strip: {
       background: 'yellow',
+      height: 10,
+      flex: 1,
       margin: [40, 0, 60],
+    },
+    mblock: {
+      margin: [-20, 8, 0, -20],
     },
     section: {
       maxWidth: 1200,
       flex: 1,
       margin: [0, 'auto'],
       padding: [20, 0],
+    },
+    align: {
+      margin: ['auto', 0],
+    },
+    row: {
+      flexFlow: 'row',
+    },
+    alignCenter: {
+      alignItems: 'center',
     },
     h2: {
       margin: [40, 'auto'],
@@ -121,6 +147,46 @@ export default class Home {
       fontSize: 17,
       lineHeight: '2rem',
       margin: 0,
+    }
+  }
+}
+
+@component class Section {
+  render() {
+    return (
+      <section>
+        {this.props.children}
+      </section>
+    )
+  }
+
+  static style = {
+    section: {
+      padding: [30, 0],
+    },
+  }
+}
+
+@component class Title {
+  static defaultProps = {
+    size: 2
+  }
+
+  render() {
+    const { size, style, ...props } = this.props
+
+    return React.createElement(`h${size}`, {
+      ...props,
+      $title: true,
+      style: {
+        ...style,
+        fontSize: (6/size) * 12,
+      }
+    })
+  }
+
+  static style = {
+    title: {
     }
   }
 }
