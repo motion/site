@@ -6,11 +6,22 @@ export default @component class Root {
       <root>
         <Head />
         <Section theme="odd">
-          <Title>Test it out</Title>
-          <Text>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</Text>
+          <Title>Meet our Team</Title>
+          <Flex centered $main>
+            <Text big>We hire amazing specialists from all fields of data science, from engineers to statisticians to advanced modeling experts. Our team is instantly available, diverse, and flexible which means you don’t need to recruit, hire, and manage.</Text>
+          </Flex>
+          <Flex row pad>
+            <Flex>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</Flex>
+            <Flex>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</Flex>
+            <Flex>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</Flex>
+          </Flex>
+
         </Section>
       </root>
     )
+  }
+
+  static style = {
   }
 }
 
@@ -45,10 +56,7 @@ export default @component class Root {
 
   static style = {
     header: {
-      padding: 100,
       color: '#aaa',
-      overflow: 'hidden',
-      position: 'relative',
       flex: 1,
     },
     logo: {
@@ -166,12 +174,14 @@ export default @component class Root {
 
   static style = {
     section: {
-      padding: ['3rem', '2rem'],
+      padding: ['4rem', '2rem'],
+      overflow: 'hidden',
+      position: 'relative',
     },
     content: {
       flex: 1,
       margin: [0, 'auto'],
-      maxWidth: 1200,
+      maxWidth: 1000,
       width: '100%',
     },
     theme: {
@@ -205,18 +215,19 @@ export default @component class Root {
   static style = {
     title: {
       fontWeight: 200,
+      margin: [0, 0, '3rem'],
     }
   }
 }
 
 @component class Text {
   render() {
-    const { size } = this.props
+    const { big, small } = this.props
 
     return (
       <text
-        $large={size === 'large'}
-        $small={size === 'small'}
+        $big={big}
+        $small={small}
       >
         {this.props.children}
       </text>
@@ -227,14 +238,46 @@ export default @component class Root {
     text:  {
       fontSize: 16,
       lineHeight: '2rem',
+      margin: [0, 0, '2rem'],
     },
     small:  {
       fontSize: 14,
       lineHeight: '2rem',
     },
-    large:  {
+    big:  {
       fontSize: 18,
-      lineHeight: '2rem',
+      lineHeight: '2.2rem',
+    },
+  }
+}
+
+@component class Flex {
+  render() {
+    const { row, align, justify, centered, pad, style, ...props } = this.props
+
+    return (
+      <flex
+        {...props}
+        $row={row}
+        $pad={pad}
+        style={{
+          ...style,
+          alignItems: align || centered && 'center',
+          justifyContent: justify || centered && 'center',
+        }}
+      />
+    )
+  }
+
+  static style = {
+    flex: {
+      flex: 1,
+    },
+    row: {
+      flexDirection: 'row',
+    },
+    pad: {
+      padding: 20,
     },
   }
 }
