@@ -5,8 +5,9 @@ export default @component class Root {
     return (
       <root>
         <Head />
-        <Section>
+        <Section theme="odd">
           <Title>Test it out</Title>
+          <Text>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</Text>
         </Section>
       </root>
     )
@@ -14,19 +15,10 @@ export default @component class Root {
 }
 
 @component class Head {
-  componentDidMount() {
-    this.setHeight()
-    this.addEvent(window, 'resize', this.setHeight)
-  }
-
-  setHeight = () => {
-    this.head.style.minHeight = `${window.innerHeight}px`
-  }
-
   render() {
     return (
-      <root>
-        <header ref={_ => this.head = _}>
+      <Section background="#111" tall>
+        <header>
           <logo>
             <row $alignCenter><cursor $mblock /> macro</row>
           </logo>
@@ -47,20 +39,17 @@ export default @component class Root {
           </align>
           <line />
         </header>
-      </root>
+      </Section>
     )
   }
 
   static style = {
-    root: {
-      background: '#fefefe',
-    },
     header: {
-      background: '#111',
       padding: 100,
-      color: '#ccc',
+      color: '#aaa',
       overflow: 'hidden',
       position: 'relative',
+      flex: 1,
     },
     logo: {
       color: '#fff',
@@ -152,18 +141,46 @@ export default @component class Root {
 }
 
 @component class Section {
+  componentDidMount() {
+    if (this.props.tall) {
+      this.setHeight()
+      this.addEvent(window, 'resize', this.setHeight)
+    }
+  }
+
+  setHeight = () => {
+    this.section.style.minHeight = `${window.innerHeight}px`
+  }
+
   render() {
+    const { background } = this.props
+
     return (
-      <section>
-        {this.props.children}
+      <section ref={_ => this.section = _} style={{ background }}>
+        <content>
+          {this.props.children}
+        </content>
       </section>
     )
   }
 
   static style = {
     section: {
-      padding: [30, 0],
+      padding: ['3rem', '2rem'],
     },
+    content: {
+      flex: 1,
+      margin: [0, 'auto'],
+      maxWidth: 1200,
+      width: '100%',
+    },
+    theme: {
+      odd: {
+        section: {
+          background: '#eee',
+        }
+      }
+    }
   }
 }
 
@@ -187,6 +204,37 @@ export default @component class Root {
 
   static style = {
     title: {
+      fontWeight: 200,
     }
+  }
+}
+
+@component class Text {
+  render() {
+    const { size } = this.props
+
+    return (
+      <text
+        $large={size === 'large'}
+        $small={size === 'small'}
+      >
+        {this.props.children}
+      </text>
+    )
+  }
+
+  static style = {
+    text:  {
+      fontSize: 16,
+      lineHeight: '2rem',
+    },
+    small:  {
+      fontSize: 14,
+      lineHeight: '2rem',
+    },
+    large:  {
+      fontSize: 18,
+      lineHeight: '2rem',
+    },
   }
 }
