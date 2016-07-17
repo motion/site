@@ -11,14 +11,20 @@ export default class Home {
       <root>
         <header ref={_ => this.head = _}>
           <logo>
-            yello
+            macro
           </logo>
           <lead>
-            Yello is data science.
+            Macro is data science.
           </lead>
           <snippet>
-            An always on team of experts that answer your companies biggest questions with
-            live, interactive applications.
+            A diverse team of data scientists that work for you, answering your company's biggest questions.
+          </snippet>
+          <snippet>
+            We grow with your company. Your data intelligence never goes stale.
+          </snippet>
+          <snippet>
+            What do you get? Live, interactive, cross-platform answers
+            as applications, in less time than in-house.
           </snippet>
           <cursor />
           <snippet>
@@ -64,6 +70,7 @@ export default class Home {
       position: 'relative',
       zIndex: 100,
       margin: [80, 0],
+      color: '#fff',
     },
     snippet: {
       fontSize: 16,
