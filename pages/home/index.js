@@ -6,7 +6,7 @@ export default @component class Root {
     return (
       <root>
         <Header />
-        <Section theme="odd">
+        <Section theme="odd" tall>
           <Title>Meet our Team</Title>
           <Flex centered $main>
             <Text big>We hire amazing specialists from all fields of data science, from engineers to statisticians to advanced modeling experts. Our team is instantly available, diverse, and flexible which means you don’t need to recruit, hire, and manage.</Text>
@@ -15,6 +15,27 @@ export default @component class Root {
             <Flex>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</Flex>
             <Flex>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</Flex>
             <Flex>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</Flex>
+          </Flex>
+        </Section>
+        <Section theme="canvas" tall>
+          <Title>Bla</Title>
+          <Flex centered $main>
+            <Text big>We hire amazing specialists from all fields of data science, from engineers to statisticians to advanced modeling experts. Our team is instantly available, diverse, and flexible which means you don’t need to recruit, hire, and manage.</Text>
+          </Flex>
+          <Flex row pad>
+            <Flex>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</Flex>
+            <Flex>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</Flex>
+            <Flex>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</Flex>
+          </Flex>
+        </Section>
+        <Section theme="dark">
+          <Flex centered $main>
+            <Text big>Get in touch:</Text>
+          </Flex>
+          <Flex row pad>
+            <Flex>email@email.com</Flex>
+            <Flex>email@email.com</Flex>
+            <Flex>email@email.com</Flex>
           </Flex>
         </Section>
       </root>
@@ -233,8 +254,19 @@ export default @component class Root {
       odd: {
         section: {
           background: '#eee',
-        }
-      }
+        },
+      },
+      canvas: {
+        section: {
+          background: '#e7e6d9',
+        },
+      },
+      dark: {
+        section: {
+          color: '#fff',
+          background: '#222',
+        },
+      },
     }
   }
 }
