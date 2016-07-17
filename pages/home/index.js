@@ -16,11 +16,8 @@ export default class Home {
           <lead>
             Macro is data science.
           </lead>
-          <snippet>
+          <snippet $emphasis>
             A diverse team of data scientists that work for you, answering your company's biggest questions.
-          </snippet>
-          <snippet>
-            We grow with your company. Your data intelligence never goes stale.
           </snippet>
           <snippet>
             Live, interactive, cross-platform answers on your data, more accurately and in less time than in-house.
@@ -76,6 +73,11 @@ export default class Home {
       minWidth: 350,
       width: '40%',
       margin: [0, 0, 20],
+    },
+    emphasis: {
+      fontSize: 22,
+      lineHeight: '2rem',
+      width: '45%',
     },
     line: {
       width: 1,
