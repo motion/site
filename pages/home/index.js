@@ -23,8 +23,7 @@ export default class Home {
             We grow with your company. Your data intelligence never goes stale.
           </snippet>
           <snippet>
-            What do you get? Live, interactive, cross-platform answers
-            as applications, in less time than in-house.
+            Live, interactive, cross-platform answers on your data, more accurately and in less time than in-house.
           </snippet>
           <cursor />
           <snippet>
