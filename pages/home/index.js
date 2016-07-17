@@ -11,10 +11,10 @@ export default class Home {
       <root>
         <header ref={_ => this.head = _}>
           <logo>
-            macro
+            yello
           </logo>
           <lead>
-            Macro is data science.
+            Yello is data science.
           </lead>
           <snippet>
             An always on team of experts that answer your companies biggest questions with
@@ -27,15 +27,24 @@ export default class Home {
           <line />
         </header>
         <section>
-          <div $pad $center $tl>
-            test me out
-          </div>
+          <h2>
+            Our team
+          </h2>
+          <p $pad>
+            We'll assign you a senior data scientist as an account lead who will be your point of contact and coordinate all your questions with our full team.
+          </p>
+          <p $pad>
+            We hire amazing specialists from all fields of data science, from engineers to statisticians to advanced modeling experts. Our team is instantly available, diverse, and flexible which means you don’t need to recruit, hire, and manage.
+          </p>
         </section>
       </root>
     )
   }
 
   static style = {
+    root: {
+      background: '#fefefe',
+    },
     header: {
       background: '#111',
       padding: 100,
@@ -80,6 +89,17 @@ export default class Home {
       background: 'yellow',
       margin: [40, 0, 60],
     },
+    section: {
+      maxWidth: 1200,
+      flex: 1,
+      margin: [0, 'auto'],
+      padding: [20, 0],
+    },
+    h2: {
+      margin: [40, 'auto'],
+      fontWeight: 200,
+      fontSize: 28,
+    },
     tl: {
       fontSize: 22,
     },
@@ -89,5 +109,10 @@ export default class Home {
     center: {
       textAlign: 'center',
     },
+    p: {
+      fontSize: 17,
+      lineHeight: '2rem',
+      margin: 0,
+    }
   }
 }
