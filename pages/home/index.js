@@ -104,7 +104,7 @@ export default @component class Root {
     },
     strip: {
       background: 'yellow',
-      height: 10,
+      height: 5,
       flex: 1,
       margin: [40, 0, 60],
     },
