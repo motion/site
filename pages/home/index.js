@@ -1,10 +1,11 @@
 import component from '../../component'
+import { range } from 'lodash'
 
 export default @component class Root {
   render() {
     return (
       <root>
-        <Head />
+        <Header />
         <Section theme="odd">
           <Title>Meet our Team</Title>
           <Flex centered $main>
@@ -15,7 +16,6 @@ export default @component class Root {
             <Flex>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</Flex>
             <Flex>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</Flex>
           </Flex>
-
         </Section>
       </root>
     )
@@ -25,10 +25,48 @@ export default @component class Root {
   }
 }
 
-@component class Head {
+@component class DotGrid {
+  render() {
+    return (
+      <grid>
+        {range(100).map(i =>
+          <row>
+            {range(100).map(i =>
+              <dot />
+            )}
+          </row>
+        )}
+      </grid>
+
+    )
+  }
+
+  static style = {
+    grid: {
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      right: 0,
+      bottom: 0,
+    },
+    row: {
+      flexDirection: 'row',
+    },
+    dot: {
+      width: 2,
+      height: 2,
+      margin: 10,
+      background: 'rgba(255,255,255,0.09)',
+      borderRadius: 100,
+    },
+  }
+}
+
+@component class Header {
   render() {
     return (
       <Section background="#111" tall>
+        <DotGrid />
         <header>
           <logo>
             <row $alignCenter><cursor $mblock /> macro</row>
@@ -44,9 +82,14 @@ export default @component class Root {
               Our platform enables an ongoing, always up to date history of your intelligence.
             </snippet>
             <strip />
-            <snippet>
-              This is the future of running companies.
-            </snippet>
+            <Flex row justify="space-between">
+              <snippet>
+                This is the future of running companies.
+              </snippet>
+              <Button>
+                Call us
+              </Button>
+            </Flex>
           </align>
           <line />
         </header>
@@ -107,6 +150,8 @@ export default @component class Root {
       height: 5,
       flex: 1,
       margin: [40, 0, 60],
+      position: 'relative',
+      zIndex: 200,
     },
     mblock: {
       margin: [-20, 8, 0, -20],
@@ -279,5 +324,24 @@ export default @component class Root {
     pad: {
       padding: 20,
     },
+  }
+}
+
+@component class Button {
+  render() {
+    return (
+      <button {...this.props} />
+    )
+  }
+
+  static style = {
+    button: {
+      padding: [8, 16],
+      border: 'none',
+      borderRadius: 6,
+      background: 'rgb(0, 0, 0)',
+      color: '#ccc',
+      fontSize: 13,
+    }
   }
 }
