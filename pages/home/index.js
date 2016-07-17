@@ -6,28 +6,8 @@ export default @component class Root {
     return (
       <root>
         <Header />
-        <Section theme="odd" tall>
-          <Title>Meet our Team</Title>
-          <Flex centered $main>
-            <Text big>We hire amazing specialists from all fields of data science, from engineers to statisticians to advanced modeling experts. Our team is instantly available, diverse, and flexible which means you don’t need to recruit, hire, and manage.</Text>
-          </Flex>
-          <Flex row pad>
-            <Flex>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</Flex>
-            <Flex>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</Flex>
-            <Flex>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</Flex>
-          </Flex>
-        </Section>
-        <Section theme="canvas" tall>
-          <Title>Bla</Title>
-          <Flex centered $main>
-            <Text big>We hire amazing specialists from all fields of data science, from engineers to statisticians to advanced modeling experts. Our team is instantly available, diverse, and flexible which means you don’t need to recruit, hire, and manage.</Text>
-          </Flex>
-          <Flex row pad>
-            <Flex>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</Flex>
-            <Flex>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</Flex>
-            <Flex>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</Flex>
-          </Flex>
-        </Section>
+        <TeamSection />
+        <ProductSection />
         <Section theme="dark">
           <Flex centered $main>
             <Text big>Get in touch:</Text>
@@ -43,6 +23,49 @@ export default @component class Root {
   }
 
   static style = {
+  }
+}
+
+@component class ProductSection {
+  render() {
+    return (
+      <Section theme="canvas">
+        <Title center>Amazing Product</Title>
+        <Flex row>
+          <Flex centered>
+            <Text big>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua .</Text>
+            <Text>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</Text>
+          </Flex>
+          <Flex>
+            <img src="screen.png" width={2782 / 2} height={1734 / 2} />
+          </Flex>
+        </Flex>
+      </Section>
+    )
+  }
+
+  static style = {
+    img: {
+      margin: [0, -700, 0, 0],
+    }
+  }
+}
+
+@component class TeamSection {
+  render() {
+    return (
+      <Section theme="odd">
+        <Title>Meet our Team</Title>
+        <Flex centered $main>
+          <Text big>We hire amazing specialists from all fields of data science, from engineers to statisticians to advanced modeling experts. Our team is instantly available, diverse, and flexible which means you don’t need to recruit, hire, and manage.</Text>
+        </Flex>
+        <Flex row pad>
+          <Flex>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</Flex>
+          <Flex>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</Flex>
+          <Flex>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</Flex>
+        </Flex>
+      </Section>
+    )
   }
 }
 
@@ -77,7 +100,7 @@ export default @component class Root {
       width: 2,
       height: 2,
       margin: 10,
-      background: 'rgba(255,255,255,0.09)',
+      background: 'rgba(255,255,255,0.07)',
       borderRadius: 100,
     },
   }
@@ -277,11 +300,12 @@ export default @component class Root {
   }
 
   render() {
-    const { size, style, ...props } = this.props
+    const { size, style, center, ...props } = this.props
 
     return React.createElement(`h${size}`, {
       ...props,
       $title: true,
+      $center: center,
       style: {
         ...style,
         fontSize: (6/size) * 12,
@@ -293,7 +317,10 @@ export default @component class Root {
     title: {
       fontWeight: 200,
       margin: [0, 0, '3rem'],
-    }
+    },
+    center: {
+      textAlign: 'center',
+    },
   }
 }
 
