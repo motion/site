@@ -1,5 +1,6 @@
 import component from '../../component'
 import { range } from 'lodash'
+import { findDOMNode } from 'react-dom'
 
 export default @component class Root {
   render() {
@@ -70,13 +71,17 @@ export default @component class Root {
 }
 
 @component class DotGrid {
+  shouldComponentUpdate() {
+    return false
+  }
+
   render() {
     return (
-      <grid>
+      <grid {...this.props}>
         {range(100).map(i =>
-          <row>
-            {range(100).map(i =>
-              <dot />
+          <row key={i}>
+            {range(100).map(j =>
+              <dot key={j} />
             )}
           </row>
         )}
@@ -100,9 +105,109 @@ export default @component class Root {
       width: 2,
       height: 2,
       margin: 10,
-      background: 'rgba(255,255,255,0.07)',
+      background: 'rgba(255,255,255,0.06)',
       borderRadius: 100,
     },
+  }
+}
+
+const color = color => ({ color })
+const size = size => ({ width: size, height: size })
+
+@component class Triangle {
+  static defaultProps = {
+    size: 40,
+    color: 'white'
+  }
+
+  render() {
+    const { size, color, ...props } = this.props
+
+    return (
+      <svg {...props} $size={size} viewBox="0 0 64 64">
+        <g>
+          <path fill={color} d="M63.766,59.234L33.856,3.082c-0.697-1.308-2.844-1.308-3.54,0L0.407,59.234    c-0.331,0.622-0.312,1.372,0.051,1.975c0.362,0.605,1.015,0.975,1.72,0.975h59.816c0.705,0,1.357-0.369,1.721-0.975    C64.076,60.606,64.096,59.856,63.766,59.234z M5.519,58.172L32.086,8.291l26.568,49.881H5.519z" />
+        </g>
+      </svg>
+    )
+  }
+
+  static style = {
+    size,
+  }
+}
+
+@component class Square {
+  static defaultProps = {
+    size: 40,
+    color: 'white'
+  }
+
+  render() {
+    const { size, color, ...props } = this.props
+    return <square $size={size} $square={color} {...props} />
+  }
+
+  static style = {
+    square: color => ({
+      border: `2px solid ${color}`
+    }),
+    size,
+  }
+}
+
+@component class FloatingShapes {
+  state = {
+    tick: 0
+  }
+
+  componentDidMount() {
+    setInterval(() => {
+      if (this.state.tick > 100) {
+        this.setState({ tick: 0 })
+      }
+
+      this.setState({ tick: this.state.tick + 1 })
+    }, 16)
+  }
+
+  render() {
+    return (
+      <shapes>
+        {range(20).map(i =>
+          <trang $shape $pos={20/i + this.state.tick / 100} key={i}>
+            <Triangle $inner={20/i + this.state.tick / 100} />
+          </trang>
+        )}
+        {range(20).map(i =>
+          <squar $shape $pos={20/i + this.state.tick / 50} key={i}>
+            <Square $inner={20/i + this.state.tick / 50} />
+          </squar>
+        )}
+      </shapes>
+    )
+  }
+
+  static style = {
+    shapes: {
+      position: 'absolute',
+      top: '50%',
+      left: '50%',
+    },
+    shape: {
+      position: 'absolute',
+    },
+    pos: pos => ({
+      transform: {
+        rotate: `${pos * 360}deg`,
+        x: pos * 50,
+      }
+    }),
+    inner: pos => ({
+      transform: {
+        rotate: `${pos}deg`,
+      }
+    }),
   }
 }
 
@@ -110,14 +215,18 @@ export default @component class Root {
   render() {
     return (
       <Section background="#111" tall>
-        <DotGrid />
+        <DotGrid $dotgrid />
+        <FloatingShapes />
         <header>
           <logo>
-            <row $alignCenter><cursor $mblock /> macro</row>
+            <row $alignCenter>
+              <brand><bb /><ba /></brand>
+              <btext>macro</btext>
+            </row>
           </logo>
           <align>
             <lead>
-              Macro is data science.
+              Macro is data science
             </lead>
             <snippet $emphasis>
               Expert data scientists working work with you to answer your company's biggest questions.
@@ -127,11 +236,8 @@ export default @component class Root {
             </snippet>
             <strip />
             <Flex row justify="space-between">
-              <snippet>
-                This is the future of running companies.
-              </snippet>
               <Button>
-                Call us
+                Winter 2016 batch information
               </Button>
             </Flex>
           </align>
@@ -146,14 +252,13 @@ export default @component class Root {
       color: '#aaa',
       flex: 1,
     },
-    logo: {
-      color: '#fff',
-      fontSize: 26,
-      fontWeight: 700,
-      margin: [0, 0, 20],
+    dotgrid: {
+      transform: {
+        rotate: '20deg'
+      }
     },
     lead: {
-      fontSize: 72,
+      fontSize: '8vh',
       fontWeight: 200,
       position: 'relative',
       zIndex: 100,
@@ -183,22 +288,46 @@ export default @component class Root {
         rotate: '20deg',
       },
     },
-    cursor: {
-      width: 20,
-      height: 20,
-      background: '#000',
-      border: '2px solid yellow',
+    logo: {
+      color: '#fff',
+      fontSize: 26,
+      fontWeight: 700,
+      margin: [0, 0, 20],
+      pointerEvents: 'none',
+      userSelect: 'none',
+    },
+    brand: {
+      width: 16,
+      height: 16,
+      background: '#111',
+      border: '2px solid rgb(50, 242, 174)',
+      borderRadius: 1,
+      margin: [-18, -5, 0, -10],
+      position: 'relative',
+    },
+    bb: {
+      background: '#111',
+      position: 'absolute',
+      bottom: -5,
+      right: -5,
+      width: 13,
+      height: 13,
+      // borderRadius: 100,
+      transform: {
+        rotate: '-45deg',
+      },
+    },
+    btext: {
+      position: 'relative',
+      zIndex: 1,
     },
     strip: {
-      background: 'yellow',
+      // background: 'yellow',
       height: 5,
       flex: 1,
       margin: [40, 0, 60],
       position: 'relative',
       zIndex: 200,
-    },
-    mblock: {
-      margin: [-20, 8, 0, -20],
     },
     section: {
       maxWidth: 1200,
