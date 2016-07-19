@@ -30,14 +30,14 @@ export default @component class Root {
 @component class ProductSection {
   render() {
     return (
-      <Section theme="canvas">
+      <Section theme="canvas" tall>
         <Title center>Amazing Product</Title>
         <Flex row>
           <Flex centered>
             <Text big>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua .</Text>
             <Text>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</Text>
           </Flex>
-          <Flex>
+          <Flex centered>
             <img src="screen.png" width={2782 / 3} height={1734 / 3} />
           </Flex>
         </Flex>
@@ -55,18 +55,35 @@ export default @component class Root {
 @component class TeamSection {
   render() {
     return (
-      <Section theme="odd">
-        <Title>Meet our Team</Title>
-        <Flex centered $main>
-          <Text big>We hire amazing specialists from all fields of data science, from engineers to statisticians to advanced modeling experts. Our team is instantly available, diverse, and flexible which means you don’t need to recruit, hire, and manage.</Text>
-        </Flex>
-        <Flex row pad>
-          <Flex>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</Flex>
-          <Flex>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</Flex>
-          <Flex>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</Flex>
+      <Section theme="odd" tall>
+        <Flex row centered>
+          <Flex $intro>
+            When I started Macro, I knew I needed to make something totally new.
+            Because I'm so humble that most people don't understand,
+            I did it all by myself. Now, I'm ready to allow the best companies to use us.
+
+            <br />
+            <br />
+            <small>- Dr. Nicholas Alexander Cammarata, Esquire</small>
+          </Flex>
+          <Flex>
+            <img src="http://cdn.decoist.com/wp-content/uploads/2013/05/The-Eames-Lounger-was-a-regular-on-TV-Show-Frasier.jpg"  />
+          </Flex>
         </Flex>
       </Section>
     )
+  }
+  static style = {
+    intro: {
+      fontSize: 18,
+      lineHeight: '2.5rem',
+    },
+    img: {
+      borderRadius: 1000,
+      width: 300,
+      height: 300,
+      margin: 'auto',
+    },
   }
 }
 
@@ -86,7 +103,6 @@ export default @component class Root {
           </row>
         )}
       </grid>
-
     )
   }
 
