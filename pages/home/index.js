@@ -2,6 +2,11 @@ import component from '../../component'
 import { range } from 'lodash'
 import { findDOMNode } from 'react-dom'
 
+const media = {
+  large: '@media (min-width: 600px)',
+  tall: '@media (min-height: 1279px)',
+}
+
 export default @component class Root {
   render() {
     return (
@@ -9,7 +14,7 @@ export default @component class Root {
         <Header />
         <TeamSection />
         <ProductSection />
-        <Section theme="dark">
+        <Section dark>
           <Flex centered $main>
             <Text big>Get in touch:</Text>
           </Flex>
@@ -30,7 +35,7 @@ export default @component class Root {
 @component class ProductSection {
   render() {
     return (
-      <Section theme="canvas" tall>
+      <Section canvas tall>
         <Title center>Amazing Product</Title>
         <Flex row>
           <Flex centered>
@@ -55,7 +60,7 @@ export default @component class Root {
 @component class TeamSection {
   render() {
     return (
-      <Section theme="odd" tall>
+      <Section odd tall>
         <Flex row centered>
           <Flex $intro>
             When I started Macro, I knew I needed to make something totally new.
@@ -232,23 +237,22 @@ const size = size => ({ width: size, height: size })
     return (
       <Section background="#111" tall>
         <DotGrid $dotgrid />
-        <FloatingShapes />
         <header>
           <logo>
             <row $alignCenter>
               <brand><bb /><ba /></brand>
-              <btext>macro</btext>
+              <btext $color="red">macro</btext>
             </row>
           </logo>
           <align>
-            <lead>
+            <lead $$red>
               Macro is data science
             </lead>
             <snippet $emphasis>
-              Expert data scientists working work with you to answer your company's biggest questions.
+              Expert data scientists, solving your company's biggest data questions.
             </snippet>
             <snippet>
-              Our platform enables an ongoing, always up to date history of your intelligence.
+              Lorem ipsum.
             </snippet>
             <strip />
             <Flex row justify="space-between">
@@ -264,6 +268,7 @@ const size = size => ({ width: size, height: size })
   }
 
   static style = {
+    color: color => ({ color }),
     header: {
       color: '#aaa',
       flex: 1,
@@ -274,12 +279,15 @@ const size = size => ({ width: size, height: size })
       }
     },
     lead: {
-      fontSize: '8vh',
+      fontSize: '5vh',
       fontWeight: 200,
       position: 'relative',
       zIndex: 100,
       margin: [80, 0],
       color: '#fff',
+      [media.tall]: {
+        fontSize: 64,
+      },
     },
     snippet: {
       fontSize: 16,
@@ -405,6 +413,8 @@ const size = size => ({ width: size, height: size })
       </section>
     )
   }
+
+  static themeProps = ['odd', 'canvas', 'dark']
 
   static style = {
     section: {

@@ -3,12 +3,15 @@ import browser from 'detect-browser'
 import event from 'disposable-event'
 import { CompositeDisposable } from 'sb-event-kit'
 import { Component } from 'react'
+import baseStyles from './baseStyles'
+import React from 'react'
 
 const style = styler()
 
 export default function ComponentDecorate(component) {
   class ProxyComponent {
     constructor(...parameters) {
+      this.parentStyles = []
       this.subscriptions = new CompositeDisposable()
       Component.apply(this, parameters)
       component.apply(this, parameters)
@@ -42,5 +45,5 @@ export default function ComponentDecorate(component) {
   Object.setPrototypeOf(component.prototype, Component.prototype)
   Object.setPrototypeOf(ProxyComponent.prototype, component.prototype)
 
-  return style(ProxyComponent)
+  return style.parent(baseStyles)(style(ProxyComponent))
 }

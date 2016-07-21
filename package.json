@@ -7,7 +7,7 @@
     "detect-browser": "^1.4.0",
     "disposable-event": "^1.0.1",
     "lodash": "^4.13.1",
-    "motion-style": "^3.1.2",
+    "motion-style": "^3.2.0",
     "react": "^15.2.1",
     "react-dom": "^15.2.1",
     "react-router": "^2.6.0",
