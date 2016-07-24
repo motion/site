@@ -4,6 +4,7 @@
     "watch": "motion"
   },
   "dependencies": {
+    "chroma-js": "^1.2.1",
     "detect-browser": "^1.4.0",
     "disposable-event": "^1.0.1",
     "lodash": "^4.13.1",

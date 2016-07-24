@@ -19,4 +19,7 @@ export default {
   flex: flex => ({
     flex,
   }),
+  b: b => ({
+    borderTop: [b, 'solid', 'red'],
+  }),
 }

@@ -1,6 +1,7 @@
 import component from '../../component'
 import { range } from 'lodash'
 import { findDOMNode } from 'react-dom'
+import chroma from 'chroma-js'
 
 const media = {
   large: '@media (min-width: 600px)',
@@ -11,7 +12,7 @@ export default @component class Root {
   render() {
     return (
       <root>
-        <Header />
+        <Header dark />
         <TeamSection />
         <ProductSection />
         <Section dark>
@@ -29,6 +30,9 @@ export default @component class Root {
   }
 
   static style = {
+    root: {
+      lineHeight: '2.2rem',
+    }
   }
 }
 
@@ -118,15 +122,16 @@ export default @component class Root {
       left: 0,
       right: 0,
       bottom: 0,
+      zIndex: 0,
     },
     row: {
       flexDirection: 'row',
     },
     dot: {
-      width: 2,
-      height: 2,
+      width: 1,
+      height: 1,
       margin: 10,
-      background: 'rgba(255,255,255,0.06)',
+      background: 'rgba(255,255,255,0.1)',
       borderRadius: 100,
     },
   }
@@ -232,30 +237,31 @@ const size = size => ({ width: size, height: size })
   }
 }
 
+const brandColor = 'rgb(50, 242, 174)'
+
 @component class Header {
   render() {
     return (
       <Section background="#111" tall>
-        <DotGrid $dotgrid />
         <header>
           <logo>
             <row $alignCenter>
               <brand><bb /><ba /></brand>
-              <btext $color="red">macro</btext>
+              <btext>macro</btext>
             </row>
           </logo>
           <align>
-            <lead $$red>
-              Macro is data science
+            <lead>
+              Run your company better
             </lead>
             <snippet $emphasis>
-              Expert data scientists, solving your company's biggest data questions.
+              We are building smart systems around data intelligence.
             </snippet>
             <snippet>
-              Lorem ipsum.
+              Ask questions about your company and get better answers, faster, that are always up to date and accurate.
             </snippet>
             <strip />
-            <Flex row justify="space-between">
+            <Flex row>
               <Button>
                 Winter 2016 batch information
               </Button>
@@ -263,23 +269,24 @@ const size = size => ({ width: size, height: size })
           </align>
           <line />
         </header>
+        <DotGrid $dotgrid />
       </Section>
     )
   }
+
+  static themeProps = ['dark']
 
   static style = {
     color: color => ({ color }),
     header: {
       color: '#aaa',
       flex: 1,
-    },
-    dotgrid: {
-      transform: {
-        rotate: '20deg'
-      }
+      position: 'relative',
+      zIndex: 100,
     },
     lead: {
       fontSize: '5vh',
+      lineHeight: '5rem',
       fontWeight: 200,
       position: 'relative',
       zIndex: 100,
@@ -292,13 +299,14 @@ const size = size => ({ width: size, height: size })
     snippet: {
       fontSize: 16,
       minWidth: 350,
+      lineHeight: '1.8rem',
       width: '40%',
       margin: [0, 0, 20],
     },
     emphasis: {
-      fontSize: 22,
-      lineHeight: '2rem',
-      width: '45%',
+      fontSize: 20,
+      lineHeight: '2.5rem',
+      width: '50%',
     },
     line: {
       width: 1,
@@ -312,6 +320,19 @@ const size = size => ({ width: size, height: size })
         rotate: '20deg',
       },
     },
+    strip: {
+      background: brandColor,
+      transform: {
+        rotate: '70deg',
+      },
+      height: '200%',
+      width: 1,
+      position: 'absolute',
+      top: -210,
+      right: '10%',
+      bottom: 0,
+      zIndex: 200,
+    },
     logo: {
       color: '#fff',
       fontSize: 26,
@@ -324,7 +345,7 @@ const size = size => ({ width: size, height: size })
       width: 16,
       height: 16,
       background: '#111',
-      border: '2px solid rgb(50, 242, 174)',
+      border: [2, 'solid', brandColor],
       borderRadius: 1,
       margin: [-18, -5, 0, -10],
       position: 'relative',
@@ -336,7 +357,6 @@ const size = size => ({ width: size, height: size })
       right: -5,
       width: 13,
       height: 13,
-      // borderRadius: 100,
       transform: {
         rotate: '-45deg',
       },
@@ -344,14 +364,6 @@ const size = size => ({ width: size, height: size })
     btext: {
       position: 'relative',
       zIndex: 1,
-    },
-    strip: {
-      // background: 'yellow',
-      height: 5,
-      flex: 1,
-      margin: [40, 0, 60],
-      position: 'relative',
-      zIndex: 200,
     },
     section: {
       maxWidth: 1200,
@@ -386,7 +398,7 @@ const size = size => ({ width: size, height: size })
       fontSize: 17,
       lineHeight: '2rem',
       margin: 0,
-    }
+    },
   }
 }
 
@@ -550,12 +562,19 @@ const size = size => ({ width: size, height: size })
 
   static style = {
     button: {
+      margin: 0,
+      outline: 0,
       padding: [8, 16],
       border: 'none',
       borderRadius: 6,
-      background: 'rgb(0, 0, 0)',
-      color: '#ccc',
+      border: [1, 'solid', chroma(brandColor).darken(3.2).alpha(0.8)],
+      background: 'none',
+      boxShadow: '0 2px 0 0 #000',
+      color: [255,255,255,0.75],
       fontSize: 13,
+      hover: {
+        color: [255,255,255,0.9],
+      }
     }
   }
 }

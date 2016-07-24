@@ -7,6 +7,7 @@ import baseStyles from './baseStyles'
 import React from 'react'
 
 const style = styler()
+const parentStyles = style.parent(baseStyles)
 
 export default function ComponentDecorate(component) {
   class ProxyComponent {
@@ -45,5 +46,5 @@ export default function ComponentDecorate(component) {
   Object.setPrototypeOf(component.prototype, Component.prototype)
   Object.setPrototypeOf(ProxyComponent.prototype, component.prototype)
 
-  return style.parent(baseStyles)(style(ProxyComponent))
+  return parentStyles(style(ProxyComponent))
 }
