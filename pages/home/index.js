@@ -252,24 +252,24 @@ const brandColor = 'rgb(50, 242, 174)'
           </logo>
           <align>
             <lead>
-              Run your company better
+              Macro is data science
             </lead>
-            <snippet $emphasis>
-              We are building smart systems around data intelligence.
-            </snippet>
-            <snippet>
-              Ask questions about your company and get better answers, faster, that are always up to date and accurate.
-            </snippet>
-            <strip />
+            <p $emphasis>
+              It's not consulting. It's not a service.<br /> It's <hl>smart people</hl> and <hl>smart systems</hl>, delivering your company the answers it needs to win.
+            </p>
+            <p>
+              We are a data science team in a chat app, delivering <hl>smart answers as apps</hl> to your companies big and small questions.
+            </p>
+            <br />
+
             <Flex row>
               <Button>
-                Winter 2016 batch information
+                Get a demo
               </Button>
             </Flex>
           </align>
           <line />
         </header>
-        <DotGrid $dotgrid />
       </Section>
     )
   }
@@ -290,13 +290,17 @@ const brandColor = 'rgb(50, 242, 174)'
       fontWeight: 200,
       position: 'relative',
       zIndex: 100,
-      margin: [80, 0],
+      margin: [0, 0],
       color: '#fff',
       [media.tall]: {
         fontSize: 64,
       },
     },
-    snippet: {
+    hl: {
+      display: 'inline',
+      borderBottom: [2, 'solid', brandColor]
+    },
+    p: {
       fontSize: 16,
       minWidth: 350,
       lineHeight: '1.8rem',
@@ -321,7 +325,7 @@ const brandColor = 'rgb(50, 242, 174)'
       },
     },
     strip: {
-      background: brandColor,
+      background: 'rgba(255,255,255,0.2)',
       transform: {
         rotate: '70deg',
       },
@@ -393,11 +397,6 @@ const brandColor = 'rgb(50, 242, 174)'
     },
     center: {
       textAlign: 'center',
-    },
-    p: {
-      fontSize: 17,
-      lineHeight: '2rem',
-      margin: 0,
     },
   }
 }
