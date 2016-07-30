@@ -9,22 +9,11 @@ const media = {
 }
 
 export default @component class Root {
+
   render() {
     return (
       <root>
         <Header dark />
-        <TeamSection />
-        <ProductSection />
-        <Section dark>
-          <Flex centered $main>
-            <Text big>Get in touch:</Text>
-          </Flex>
-          <Flex row pad>
-            <Flex>email@email.com</Flex>
-            <Flex>email@email.com</Flex>
-            <Flex>email@email.com</Flex>
-          </Flex>
-        </Section>
       </root>
     )
   }
@@ -69,7 +58,7 @@ export default @component class Root {
           <Flex $intro>
             When I started Macro, I knew I needed to make something totally new.
             Because I'm so humble that most people don't understand,
-            I did it all by myself. Now, I'm ready to allow the best companies to use us.
+            I did it all by myself. Now, Im ready to allow the best companies to use us.
 
             <br />
             <br />
@@ -240,6 +229,16 @@ const size = size => ({ width: size, height: size })
 const brandColor = 'rgb(50, 242, 174)'
 
 @component class Header {
+  componentDidMount() {
+    window.Intercom("boot", {
+      app_id: "a7huc5je"
+    })
+    window.intercomSettings = {
+      created_at: 1234567890,
+      app_id: "a7huc5je",
+      custom_launcher_selector: '#contact'    }
+  }
+
   render() {
     return (
       <Section background="#111" tall>
@@ -255,17 +254,19 @@ const brandColor = 'rgb(50, 242, 174)'
               Macro is data science
             </lead>
             <p $emphasis>
-              It's not consulting. It's not a service.<br /> It's <hl>smart people</hl> and <hl>smart systems</hl>, delivering your company the answers it needs to win.
+              It's not consulting. It's not a service.<br /> Its <hl>smart people</hl> and <hl>smart systems</hl>, delivering your company the answers it needs to win.
             </p>
             <p>
-              We are a data science team in a chat app, delivering <hl>smart answers as apps</hl> to your companies big and small questions.
+              We are a data science team in an app, delivering <hl>smart answers as apps</hl> to your companies big and small questions.
             </p>
             <br />
 
             <Flex row>
-              <Button>
-                Get a demo
-              </Button>
+              <a id="contact" href="mailto:a7huc5je@incoming.intercom.io">
+                <Button>
+                  Get a demo
+                </Button>
+              </a>
             </Flex>
           </align>
           <line />
@@ -298,7 +299,7 @@ const brandColor = 'rgb(50, 242, 174)'
     },
     hl: {
       display: 'inline',
-      borderBottom: [2, 'solid', brandColor]
+      borderBottom: [1, 'solid', brandColor]
     },
     p: {
       fontSize: 16,

@@ -218,3 +218,6 @@ a[href^="https://maps.google.com/maps"]{display:none !important}
 #textSearch:focus {
   outline: none;
 }
+a:link {
+  text-decoration: none;
+}
